@@ -1,0 +1,74 @@
+/* ============================================================
+ * variables.css — 像素风设计变量
+ * 默认即 "classic"（经典灰）主题；themes.css 通过 [data-theme] 覆写。
+ * 所有尺寸均为整数像素，避免半像素模糊。
+ * ============================================================ */
+
+:root {
+  /* ---------- 尺寸 ---------- */
+  --cell-size: 24px; /* 单格边长，运行时由 JS 按屏幕宽度覆写 */
+  --border-w: 3px; /* 像素硬边框厚度 */
+  --grid-line: 1px; /* 已翻开格之间的细分隔线 */
+  --panel-gap: 8px;
+  --panel-pad: 8px;
+  --radius: 0px; /* 像素风一律直角 */
+
+  /* ---------- 字体 ---------- */
+  --font-pixel: 'Press Start 2P', 'Courier New', ui-monospace, 'Consolas', monospace;
+  --fs-xs: 8px;
+  --fs-sm: 10px;
+  --fs-md: 12px;
+  --fs-lg: 16px;
+
+  /* ---------- 页面与外框 ---------- */
+  --c-page-bg: #4a4a4a;
+  --c-frame: #c0c0c0;
+  --c-frame-light: #f4f4f4;
+  --c-frame-dark: #7b7b7b;
+
+  /* ---------- 单元格 ---------- */
+  --c-cell-up: #c0c0c0; /* 未翻开（凸起） */
+  --c-cell-up-light: #f4f4f4; /* 凸起高光：上 / 左 */
+  --c-cell-up-dark: #7b7b7b; /* 凸起阴影：下 / 右 */
+  --c-cell-down: #bdbdbd; /* 已翻开（凹陷） */
+  --c-cell-hover: #d6d6d6;
+  --c-cell-press: #a9a9a9;
+  --c-grid: #9a9a9a;
+  --c-cell-explode: #ff2a2a; /* 踩中的那一颗雷 */
+  --c-cell-wrong: #ffb3b3; /* 插错的旗 */
+
+  /* ---------- 文字 ---------- */
+  --c-text: #1a1a1a;
+  --c-text-dim: #4f4f4f;
+  --c-text-invert: #f4f4f4;
+
+  /* ---------- 7 段数码管 ---------- */
+  --c-display-bg: #1a0000;
+  --c-display-on: #ff2d2d;
+  --c-display-off: #3a0d0d;
+
+  /* ---------- 图标 ---------- */
+  --c-mine: #1a1a1a;
+  --c-mine-light: #f4f4f4;
+  --c-flag: #d81b1b;
+  --c-flag-ink: #1a1a1a;
+  --c-question: #1a1a1a;
+  --c-face: #ffd93b;
+  --c-face-ink: #1a1a1a;
+
+  /* ---------- 数字 1-8（经典配色） ---------- */
+  --c-1: #0000ff;
+  --c-2: #007b00;
+  --c-3: #ff0000;
+  --c-4: #000080;
+  --c-5: #800000;
+  --c-6: #008080;
+  --c-7: #000000;
+  --c-8: #6b6b6b;
+
+  /* ---------- 强调 / 状态 ---------- */
+  --c-accent: #ffd93b;
+  --c-accent-ink: #1a1a1a;
+  --c-win: #16a34a;
+  --c-lose: #dc2626;
+}

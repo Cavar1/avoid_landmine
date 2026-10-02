@@ -1,0 +1,142 @@
+/* ============================================================
+ * base.css — 重置 + 像素渲染基线 + 像素风公共基元
+ * ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* 像素风：关闭子像素抗锯齿，禁止文本放大重排 */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--c-page-bg);
+  color: var(--c-text);
+  font-family: var(--font-pixel);
+  font-size: var(--fs-md);
+  line-height: 1.6;
+  /* 像素风核心：整数缩放、不做平滑 */
+  image-rendering: pixelated;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+  font-smooth: never;
+  /* 像素风禁用文本选中高亮（游戏区域不需要选字） */
+  -webkit-tap-highlight-color: transparent;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+svg {
+  display: block;
+  image-rendering: pixelated;
+}
+
+button {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+::selection {
+  background: var(--c-accent);
+  color: var(--c-accent-ink);
+}
+
+/* 键盘可达性：像素风焦点环 */
+:focus-visible {
+  outline: var(--border-w) solid var(--c-accent);
+  outline-offset: 2px;
+}
+
+/* ============================================================
+ * 像素风公共基元
+ * 用"上/左浅 + 下/右深"的双色硬边框模拟 3D 凹凸，全直角。
+ * ============================================================ */
+
+/* 外框 / 面板：凸起 */
+.px-frame {
+  background-color: var(--c-frame);
+  border: var(--border-w) solid;
+  border-color: var(--c-frame-light) var(--c-frame-dark) var(--c-frame-dark) var(--c-frame-light);
+}
+
+/* 内嵌区域（数码管、已翻开棋盘底）：凹陷 */
+.px-inset {
+  background-color: var(--c-cell-down);
+  border: var(--border-w) solid;
+  border-color: var(--c-cell-up-dark) var(--c-cell-up-light) var(--c-cell-up-light) var(--c-cell-up-dark);
+}
+
+/* 像素按钮：默认凸起，按下/选中凹陷 */
+.px-btn {
+  background-color: var(--c-cell-up);
+  border: var(--border-w) solid;
+  border-color: var(--c-cell-up-light) var(--c-cell-up-dark) var(--c-cell-up-dark) var(--c-cell-up-light);
+  color: var(--c-text);
+  padding: 6px 10px;
+  font-size: var(--fs-sm);
+  line-height: 1;
+  user-select: none;
+  transition: none;
+}
+
+.px-btn:hover:not(:disabled) {
+  background-color: var(--c-cell-hover);
+}
+
+.px-btn:active:not(:disabled),
+.px-btn[aria-pressed='true'] {
+  background-color: var(--c-cell-press);
+  border-color: var(--c-cell-up-dark) var(--c-cell-up-light) var(--c-cell-up-light) var(--c-cell-up-dark);
+  padding: 8px 8px 4px 12px; /* 内容位移 2px，模拟被按下 */
+}
+
+.px-btn:disabled {
+  color: var(--c-text-dim);
+  opacity: 0.6;
+}
+
+/* 无障碍：仅屏幕阅读器可见 */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

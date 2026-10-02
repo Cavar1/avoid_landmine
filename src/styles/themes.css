@@ -1,0 +1,97 @@
+/* ============================================================
+ * themes.css — 主题覆写
+ * 由 <html data-theme="..."> 控制：classic | dark | vivid
+ * classic 为 :root 默认值（variables.css），此处只需覆写 dark / vivid。
+ * ============================================================ */
+
+/* ---------------- 暗色：夜光机房 ---------------- */
+[data-theme='dark'] {
+  --c-page-bg: #0b0d14;
+  --c-frame: #1b1f2e;
+  --c-frame-light: #2f3650;
+  --c-frame-dark: #0a0c12;
+
+  --c-cell-up: #232a3d;
+  --c-cell-up-light: #3a4463;
+  --c-cell-up-dark: #12161f;
+  --c-cell-down: #171b26;
+  --c-cell-hover: #2c3450;
+  --c-cell-press: #1a1f2c;
+  --c-grid: #2b3350;
+  --c-cell-explode: #ff3b3b;
+  --c-cell-wrong: #6b1f1f;
+
+  --c-text: #d7e0ff;
+  --c-text-dim: #8b96bb;
+  --c-text-invert: #0b0d14;
+
+  --c-display-bg: #05070d;
+  --c-display-on: #ff4d4d;
+  --c-display-off: #2a1216;
+
+  --c-mine: #ffd93b;
+  --c-mine-light: #0b0d14;
+  --c-flag: #ff5c5c;
+  --c-flag-ink: #d7e0ff;
+  --c-question: #9fb0ff;
+  --c-face: #ffd93b;
+  --c-face-ink: #0b0d14;
+
+  --c-1: #5b8cff;
+  --c-2: #4ade80;
+  --c-3: #ff5c5c;
+  --c-4: #b18cff;
+  --c-5: #ffb454;
+  --c-6: #4dd8e0;
+  --c-7: #d7e0ff;
+  --c-8: #8b96bb;
+
+  --c-accent: #ffd93b;
+  --c-accent-ink: #0b0d14;
+}
+
+/* ---------------- 彩色：糖果机台 ---------------- */
+[data-theme='vivid'] {
+  --c-page-bg: #2b1b4d;
+  --c-frame: #7c4dff;
+  --c-frame-light: #b39dff;
+  --c-frame-dark: #4527a0;
+
+  --c-cell-up: #9575cd;
+  --c-cell-up-light: #d1c4e9;
+  --c-cell-up-dark: #5e35b1;
+  --c-cell-down: #ede7f6;
+  --c-cell-hover: #b39ddb;
+  --c-cell-press: #7e57c2;
+  --c-grid: #cec2e8;
+  --c-cell-explode: #ff1744;
+  --c-cell-wrong: #ffcdd2;
+
+  --c-text: #2b1b4d;
+  --c-text-dim: #6b5b8a;
+  --c-text-invert: #ffffff;
+
+  --c-display-bg: #1a0b2e;
+  --c-display-on: #00e5ff;
+  --c-display-off: #2b1b4d;
+
+  --c-mine: #2b1b4d;
+  --c-mine-light: #ffffff;
+  --c-flag: #ff1744;
+  --c-flag-ink: #2b1b4d;
+  --c-question: #4527a0;
+  --c-face: #ffea00;
+  --c-face-ink: #2b1b4d;
+
+  --c-1: #2962ff;
+  --c-2: #00c853;
+  --c-3: #d50000;
+  --c-4: #6200ea;
+  --c-5: #aeea00;
+  --c-6: #00b8d4;
+  --c-7: #3e2723;
+  --c-8: #78909c;
+
+  --c-accent: #ffea00;
+  --c-accent-ink: #2b1b4d;
+}
