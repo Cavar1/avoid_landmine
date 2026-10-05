@@ -140,6 +140,57 @@ button:disabled {
   color: var(--c-text);
 }
 
+/* 95 选项卡条：标签左对齐，当前项下沉压住面板上边框 */
+.w95-tabs {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  padding-left: 2px;
+  position: relative;
+  z-index: 1;
+  margin-bottom: -2px; /* 与面板顶边重叠，形成融合 */
+}
+
+.w95-tab {
+  background-color: var(--c-cell-up);
+  border: 2px solid;
+  border-color: var(--c-cell-up-light) var(--c-cell-up-dark) var(--c-cell-up-dark)
+    var(--c-cell-up-light);
+  color: var(--c-text);
+  padding: 4px 10px;
+  font-size: var(--fs-sm);
+  line-height: 1;
+  user-select: none;
+  margin-bottom: 2px; /* 未选中：略高，露出面板顶边 */
+}
+
+.w95-tab:hover:not([aria-selected='true']) {
+  background-color: var(--c-cell-hover);
+}
+
+/* 按住（hold）反馈：同 .px-btn —— 边框反色 + 内容右下位移 1px；已选中项不参与，避免破坏与面板的融合 */
+.w95-tab:active:not([aria-selected='true']) {
+  border-color: var(--c-cell-up-dark) var(--c-cell-up-light) var(--c-cell-up-light)
+    var(--c-cell-up-dark);
+  padding: 5px 9px 3px 11px;
+}
+
+.w95-tab[aria-selected='true'] {
+  background-color: var(--c-frame);
+  margin-bottom: 0;
+  padding-bottom: 6px;
+  border-color: var(--c-cell-up-dark) var(--c-cell-up-light) var(--c-frame) var(--c-cell-up-dark); /* 抹掉下边框，与面板连成一体 */
+}
+
+/* 95 内容面板：2px 凹陷边框 */
+.w95-tab-panel {
+  background-color: var(--c-frame);
+  border: 2px solid;
+  border-color: var(--c-cell-up-dark) var(--c-cell-up-light) var(--c-cell-up-light)
+    var(--c-cell-up-dark);
+  padding: 12px;
+}
+
 /* 95 链接 */
 .w95-link {
   color: var(--c-link);

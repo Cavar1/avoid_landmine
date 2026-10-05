@@ -39,6 +39,5 @@ const emit = defineEmits<{
 .px-btn.active {
   background-color: var(--c-accent);
   color: var(--c-accent-ink);
-  border-color: var(--c-accent-ink) var(--c-accent-ink) var(--c-accent-ink) var(--c-accent-ink);
 }
 </style>

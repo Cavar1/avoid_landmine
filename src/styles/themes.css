@@ -77,7 +77,7 @@
   --c-cell-wrong: #ffcdd2;
 
   --c-text: #2b1b4d;
-  --c-text-dim: #6b5b8a;
+  --c-text-dim: #3a3542;
   --c-text-invert: #ffffff;
 
   --c-display-bg: #1a0b2e;
@@ -110,6 +110,6 @@
   --shadow-dialog: 8px 8px 0 rgba(0, 0, 0, 0.8);
 
   --c-group-border: #4527a0;
-  --c-link: #2962ff;
+  --c-link: #0033c0;
   --c-link-disabled: #8a7bb0;
 }
