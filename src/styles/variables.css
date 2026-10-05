@@ -71,4 +71,9 @@
   --c-accent-ink: #1a1a1a;
   --c-win: #16a34a;
   --c-lose: #dc2626;
+
+  /* ---------- 弹窗 ---------- */
+  --c-dialog-title-bg: #1a1a1a;
+  --c-dialog-title-text: #f4f4f4;
+  --shadow-dialog: 8px 8px 0 rgba(0, 0, 0, 0.8); /* 怀旧硬阴影黑块 */
 }

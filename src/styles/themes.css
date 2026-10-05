@@ -48,6 +48,10 @@
 
   --c-accent: #ffd93b;
   --c-accent-ink: #0b0d14;
+
+  --c-dialog-title-bg: #05070d;
+  --c-dialog-title-text: #d7e0ff;
+  --shadow-dialog: 8px 8px 0 rgba(0, 0, 0, 0.8);
 }
 
 /* ---------------- 彩色：糖果机台 ---------------- */
@@ -94,4 +98,8 @@
 
   --c-accent: #ffea00;
   --c-accent-ink: #2b1b4d;
+
+  --c-dialog-title-bg: #4527a0;
+  --c-dialog-title-text: #ffffff;
+  --shadow-dialog: 8px 8px 0 rgba(0, 0, 0, 0.8);
 }

@@ -12,7 +12,9 @@ import DifficultySelect from '@/components/DifficultySelect.vue'
 import ThemeSwitch from '@/components/ThemeSwitch.vue'
 import SoundToggle from '@/components/SoundToggle.vue'
 import RecordList from '@/components/RecordList.vue'
-import ResultOverlay from '@/components/ResultOverlay.vue'
+import DialogHost from '@/components/DialogHost.vue'
+import GameResultContent from '@/components/GameResultContent.vue'
+import { useDialogs } from '@/composables/useDialogs'
 
 // ============================================================
 // 组装核心 composables
@@ -58,6 +60,10 @@ const game = useMinesweeper({
 // ============================================================
 
 const newRecord = ref(false)
+const { open: openDialog, close: closeDialog } = useDialogs()
+
+/** 当前结算弹窗 id，重开时用于自动收起 */
+let resultDialogId: number | null = null
 
 // ============================================================
 // 计算属性
@@ -94,6 +100,31 @@ function handleSoundToggle() {
   settings.toggleSound()
   sound.enabled.value = settings.settings.value.soundEnabled
 }
+
+// ============================================================
+// 结算弹窗：胜负状态变化时弹出，重开时自动收起
+// ============================================================
+
+watch(
+  () => game.status.value,
+  (status) => {
+    if (status === 'won' || status === 'lost') {
+      const snapshot = { status, newRecord: newRecord.value }
+      resultDialogId = openDialog({
+        title: status === 'won' ? 'YOU WIN!' : 'BOOM!',
+        kind: 'info',
+        confirmText: '再来一局',
+        closable: false,
+        comp: GameResultContent,
+        compProps: snapshot,
+        onConfirm: handleRestart,
+      })
+    } else if (resultDialogId !== null) {
+      closeDialog(resultDialogId)
+      resultDialogId = null
+    }
+  },
+)
 
 // ============================================================
 // 主题应用：把 settings.theme 同步到 <html data-theme>
@@ -149,17 +180,13 @@ onMounted(() => {
           @flag="handleFlag"
         />
       </div>
-
-      <!-- 结果浮层 -->
-      <ResultOverlay
-        :status="game.status.value"
-        :new-record="newRecord"
-        @restart="handleRestart"
-      />
     </div>
 
     <!-- 最佳记录 -->
     <RecordList :records="records.records.value" />
+
+    <!-- 全局弹窗挂载点 -->
+    <DialogHost />
   </main>
 </template>
 
