@@ -7,7 +7,16 @@
 <template>
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
     <!-- 表盘 -->
-    <rect x="4" y="3" width="8" height="10" rx="0" fill="none" stroke="var(--c-text, #1a1a1a)" stroke-width="1.5" />
+    <rect
+      x="4"
+      y="3"
+      width="8"
+      height="10"
+      rx="0"
+      fill="none"
+      stroke="var(--c-text, #1a1a1a)"
+      stroke-width="1.5"
+    />
     <!-- 表冠 -->
     <rect x="7" y="0" width="2" height="2" fill="var(--c-text, #1a1a1a)" />
     <!-- 中心圆 -->

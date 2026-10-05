@@ -12,8 +12,8 @@
     <rect x="4" y="5" width="2" height="2" fill="var(--c-face-ink, #1a1a1a)" />
     <rect x="10" y="5" width="2" height="2" fill="var(--c-face-ink, #1a1a1a)" />
     <!-- 嘴巴 -->
-    <rect x="3" y="10" width="10" height="2" fill="var(--c-face-ink, #1a1a1a)" />
-    <rect x="4" y="9" width="2" height="1" fill="var(--c-face-ink, #1a1a1a)" />
-    <rect x="10" y="9" width="2" height="1" fill="var(--c-face-ink, #1a1a1a)" />
+    <rect x="4" y="10" width="8" height="2" fill="var(--c-face-ink, #1a1a1a)" />
+    <rect x="3" y="9" width="2" height="2" fill="var(--c-face-ink, #1a1a1a)" />
+    <rect x="11" y="9" width="2" height="2" fill="var(--c-face-ink, #1a1a1a)" />
   </svg>
 </template>

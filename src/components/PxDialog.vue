@@ -65,12 +65,7 @@ const hasSlot = computed(() => Boolean(slots.default))
         <!-- 按钮区 -->
         <div class="footer">
           <slot name="footer">
-            <button
-              v-if="kind === 'confirm'"
-              type="button"
-              class="px-btn"
-              @click="emit('cancel')"
-            >
+            <button v-if="kind === 'confirm'" type="button" class="px-btn" @click="emit('cancel')">
               {{ cancelText }}
             </button>
             <button type="button" class="px-btn" @click="emit('confirm')">

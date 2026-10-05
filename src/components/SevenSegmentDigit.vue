@@ -7,12 +7,12 @@ import { computed } from 'vue'
 
 const SEGMENTS = {
   a: 'M2 0h10l2 2-2 2H4L2 2z', // 上横
-  b: 'M12 3l2-2v6l-2 2V5z',     // 右上
-  c: 'M12 11l2-2v6l-2 2v-4z',    // 右下
+  b: 'M12 3l2-2v6l-2 2V5z', // 右上
+  c: 'M12 11l2-2v6l-2 2v-4z', // 右下
   d: 'M2 18h10l2-2-2-2H4l-2 2z', // 下横
-  e: 'M2 11l-2-2v6l2 2v-4z',     // 左下
-  f: 'M2 3l-2-2v6l2 2V5z',       // 左上
-  g: 'M4 8h8l2 1-2 1H4l-2-1z',   // 中横
+  e: 'M2 11l-2-2v6l2 2v-4z', // 左下
+  f: 'M2 3l-2-2v6l2 2V5z', // 左上
+  g: 'M4 8h8l2 1-2 1H4l-2-1z', // 中横
 } as const
 
 type SegKey = keyof typeof SEGMENTS
@@ -43,12 +43,7 @@ const segments = computed<readonly SegKey[]>(() => {
 </script>
 
 <template>
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 16 20"
-    class="seven-seg"
-    aria-hidden="true"
-  >
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 20" class="seven-seg" aria-hidden="true">
     <g v-for="(path, key) in SEGMENTS" :key="key">
       <path
         :d="path"

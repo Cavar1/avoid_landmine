@@ -8,10 +8,7 @@
 <template>
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
     <!-- 十字刺 -->
-    <path
-      fill="var(--c-mine, #1a1a1a)"
-      d="M7 0h2v3H7zM7 13h2v3H7zM0 7h3v2H0zM13 7h3v2h-3z"
-    />
+    <path fill="var(--c-mine, #1a1a1a)" d="M7 0h2v3H7zM7 13h2v3H7zM0 7h3v2H0zM13 7h3v2h-3z" />
     <!-- 对角刺 -->
     <path
       fill="var(--c-mine, #1a1a1a)"

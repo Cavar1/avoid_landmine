@@ -19,11 +19,7 @@ function formatTime(t: number | null): string {
 
 <template>
   <div class="record-list" aria-label="最佳记录">
-    <div
-      v-for="id in DIFFICULTY_ORDER"
-      :key="id"
-      class="record-row"
-    >
+    <div v-for="id in DIFFICULTY_ORDER" :key="id" class="record-row">
       <span class="label">{{ DIFFICULTIES[id].label }}</span>
       <span class="time">{{ formatTime(records[id]) }}</span>
     </div>

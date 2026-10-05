@@ -77,7 +77,8 @@ const statusIcon = computed(() => {
   justify-content: center;
   background-color: var(--c-cell-up);
   border: var(--border-w, 3px) solid;
-  border-color: var(--c-cell-up-light) var(--c-cell-up-dark) var(--c-cell-up-dark) var(--c-cell-up-light);
+  border-color: var(--c-cell-up-light) var(--c-cell-up-dark) var(--c-cell-up-dark)
+    var(--c-cell-up-light);
   padding: 4px;
   cursor: pointer;
   transition: none;
@@ -90,7 +91,8 @@ const statusIcon = computed(() => {
 
 .face-btn:active {
   background-color: var(--c-cell-press);
-  border-color: var(--c-cell-up-dark) var(--c-cell-up-light) var(--c-cell-up-light) var(--c-cell-up-dark);
+  border-color: var(--c-cell-up-dark) var(--c-cell-up-light) var(--c-cell-up-light)
+    var(--c-cell-up-dark);
   padding: 6px 2px 2px 6px;
 }
 

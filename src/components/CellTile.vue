@@ -64,8 +64,7 @@ const numberColor = computed(() => {
     </template>
 
     <!-- 未翻开 -->
-    <template v-else>
-    </template>
+    <template v-else> </template>
   </button>
 </template>
 
@@ -82,7 +81,8 @@ const numberColor = computed(() => {
   /* 未翻开：凸起硬边框 */
   background-color: var(--c-cell-up);
   border: var(--border-w, 3px) solid;
-  border-color: var(--c-cell-up-light) var(--c-cell-up-dark) var(--c-cell-up-dark) var(--c-cell-up-light);
+  border-color: var(--c-cell-up-light) var(--c-cell-up-dark) var(--c-cell-up-dark)
+    var(--c-cell-up-light);
   padding: 0;
   transition: none;
   cursor: pointer;

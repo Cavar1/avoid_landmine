@@ -31,18 +31,15 @@ export function createEmptyBoard(rows: number, cols: number): Cell[][] {
   if (!Number.isInteger(cols) || cols <= 0) throw new RangeError(`cols 非法: ${cols}`)
 
   return Array.from({ length: rows }, (_, row) =>
-    Array.from(
-      { length: cols },
-      (_, col): Cell => ({
-        row,
-        col,
-        isMine: false,
-        adjacentMines: 0,
-        state: 'hidden',
-        isExploded: false,
-        isWrongFlag: false,
-      }),
-    ),
+    Array.from({ length: cols }, (_, col): Cell => ({
+      row,
+      col,
+      isMine: false,
+      adjacentMines: 0,
+      state: 'hidden',
+      isExploded: false,
+      isWrongFlag: false,
+    })),
   )
 }
 
