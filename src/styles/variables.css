@@ -6,7 +6,7 @@
 
 @font-face {
   font-family: 'Unifont';
-  src: url('/font/unifont.otf') format('opentype');
+  src: url('/fonts/unifont.otf') format('opentype');
   font-display: swap;
 }
 
@@ -20,7 +20,7 @@
   --radius: 0px; /* 像素风一律直角 */
 
   /* ---------- 字体 ---------- */
-  --font-pixel: 'Unifont', 'Press Start 2P', 'Courier New', ui-monospace, 'Consolas', monospace;
+  --font-pixel: 'Press Start 2P', 'Unifont', ui-monospace, monospace;
   --fs-xs: 8px;
   --fs-sm: 10px;
   --fs-md: 12px;
