@@ -38,8 +38,20 @@ export interface Difficulty {
   mines: number
 }
 
-/** 各难度最佳用时（秒）；无记录为 null */
-export type BestRecords = Record<DifficultyId, number | null>
+/** 单档难度的战绩 */
+export interface DifficultyRecord {
+  /** 开局次数（含失败） */
+  played: number
+  /** 胜局数 */
+  wins: number
+  /** 负局数 */
+  losses: number
+  /** 最快用时（秒）；无记录为 null */
+  bestTime: number | null
+}
+
+/** 各难度战绩 */
+export type GameRecords = Record<DifficultyId, DifficultyRecord>
 
 /** 持久化设置 */
 export interface GameSettings {

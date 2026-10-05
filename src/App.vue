@@ -1,20 +1,19 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from 'vue'
+/**
+ * 页面装配：只保留游戏头部与棋盘，其余功能收进右键弹出的「选项」弹窗。
+ */
+import { computed, onMounted, watch } from 'vue'
 import type { DifficultyId } from '@/types/game'
 import { useMinesweeper } from '@/composables/useMinesweeper'
 import { useTimer } from '@/composables/useTimer'
 import { useSound } from '@/composables/useSound'
 import { useRecords } from '@/composables/useRecords'
 import { useSettings } from '@/composables/useSettings'
+import { useDialogs } from '@/composables/useDialogs'
 import GameBoard from '@/components/GameBoard.vue'
 import GameHeader from '@/components/GameHeader.vue'
-import DifficultySelect from '@/components/DifficultySelect.vue'
-import ThemeSwitch from '@/components/ThemeSwitch.vue'
-import SoundToggle from '@/components/SoundToggle.vue'
-import RecordList from '@/components/RecordList.vue'
 import DialogHost from '@/components/DialogHost.vue'
-import GameResultContent from '@/components/GameResultContent.vue'
-import { useDialogs } from '@/composables/useDialogs'
+import OptionsContent from '@/components/OptionsContent.vue'
 
 // ============================================================
 // 组装核心 composables
@@ -26,8 +25,9 @@ const sound = useSound()
 const timer = useTimer()
 
 const game = useMinesweeper({
-  onFirstReveal: () => {
+  onFirstReveal: (difficulty) => {
     timer.start()
+    records.recordStart(difficulty.id)
   },
   onReveal: () => {
     sound.playReveal()
@@ -38,32 +38,42 @@ const game = useMinesweeper({
   onMineHit: () => {
     timer.stop()
     sound.playMineHit()
+    records.recordLoss(game.difficultyId.value)
   },
   onWin: (difficulty) => {
     timer.stop()
     sound.playWin()
-    // 提交成绩
-    const elapsed = timer.seconds.value
-    if (elapsed > 0) {
-      const isNew = records.submitTime(difficulty.id, elapsed)
-      if (isNew) newRecord.value = true
-    }
+    records.recordWin(difficulty.id, timer.seconds.value)
   },
   onRestart: () => {
     timer.reset()
-    newRecord.value = false
   },
 })
 
 // ============================================================
-// 局部状态
+// 「选项」弹窗
 // ============================================================
 
-const newRecord = ref(false)
 const { open: openDialog, close: closeDialog } = useDialogs()
 
-/** 当前结算弹窗 id，重开时用于自动收起 */
-let resultDialogId: number | null = null
+/** 当前「选项」弹窗 id，起新局时用于收起 */
+let optionsDialogId: number | null = null
+
+function handleOpenOptions(): void {
+  optionsDialogId = openDialog({
+    title: '选项',
+    kind: 'info',
+    confirmText: '关闭',
+    comp: OptionsContent,
+    compProps: { onNewGame: handleNewGame },
+    onConfirm: () => {
+      optionsDialogId = null
+    },
+    onCancel: () => {
+      optionsDialogId = null
+    },
+  })
+}
 
 // ============================================================
 // 计算属性
@@ -88,52 +98,33 @@ function handleRestart() {
   game.restart()
 }
 
-function handleDifficultySelect(id: DifficultyId) {
+/** 选项弹窗里选了难度：立即开新局并收起弹窗 */
+function handleNewGame(id: DifficultyId) {
   game.restart(id)
-}
-
-function handleThemeSelect(theme: typeof settings.settings.value.theme) {
-  settings.setTheme(theme)
-}
-
-function handleSoundToggle() {
-  settings.toggleSound()
-  sound.enabled.value = settings.settings.value.soundEnabled
+  if (optionsDialogId !== null) {
+    closeDialog(optionsDialogId)
+    optionsDialogId = null
+  }
 }
 
 // ============================================================
-// 结算弹窗：胜负状态变化时弹出，重开时自动收起
+// 主题与音效同步
 // ============================================================
 
-watch(
-  () => game.status.value,
-  (status) => {
-    if (status === 'won' || status === 'lost') {
-      const snapshot = { status, newRecord: newRecord.value }
-      resultDialogId = openDialog({
-        title: status === 'won' ? 'YOU WIN!' : 'BOOM!',
-        kind: 'info',
-        confirmText: '再来一局',
-        closable: false,
-        comp: GameResultContent,
-        compProps: snapshot,
-        onConfirm: handleRestart,
-      })
-    } else if (resultDialogId !== null) {
-      closeDialog(resultDialogId)
-      resultDialogId = null
-    }
-  },
-)
-
-// ============================================================
-// 主题应用：把 settings.theme 同步到 <html data-theme>
-// ============================================================
-
+// 把 settings.theme 同步到 <html data-theme>
 watch(
   () => settings.theme.value,
   (theme) => {
     document.documentElement.dataset.theme = theme
+  },
+  { immediate: true },
+)
+
+// 无论从哪里改 settings.soundEnabled，音效实例都跟着走
+watch(
+  () => settings.soundEnabled.value,
+  (enabled) => {
+    sound.enabled.value = enabled
   },
   { immediate: true },
 )
@@ -146,29 +137,14 @@ onMounted(() => {
 
 <template>
   <main class="shell">
-    <!-- 标题 -->
-    <header class="page-header">
-      <h1 class="title">AVOID LANDMINE</h1>
-      <p class="subtitle">扫 雷</p>
-    </header>
-
-    <!-- 顶部工具栏 -->
-    <div class="toolbar">
-      <DifficultySelect :current="game.difficultyId.value" @select="handleDifficultySelect" />
-      <div class="toolbar-right">
-        <ThemeSwitch :current="settings.theme.value" @select="handleThemeSelect" />
-        <SoundToggle :enabled="settings.soundEnabled.value" @toggle="handleSoundToggle" />
-      </div>
-    </div>
-
-    <!-- 游戏主体区域 -->
     <div class="game-area">
-      <!-- 头部：雷数 / 笑脸 / 计时 -->
+      <!-- 头部：雷数 / 笑脸（左键重开 · 右键选项） / 计时 -->
       <GameHeader
         :remaining-mines="game.remainingMines.value"
         :elapsed-seconds="elapsedSeconds"
         :status="game.status.value"
         @restart="handleRestart"
+        @options="handleOpenOptions"
       />
 
       <!-- 棋盘 -->
@@ -182,9 +158,6 @@ onMounted(() => {
       </div>
     </div>
 
-    <!-- 最佳记录 -->
-    <RecordList :records="records.records.value" />
-
     <!-- 全局弹窗挂载点 -->
     <DialogHost />
   </main>
@@ -195,53 +168,14 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 16px;
   padding: 16px;
   min-height: 100vh;
   user-select: none;
 }
 
-/* 标题 */
-.page-header {
-  text-align: center;
-  user-select: none;
-}
-
-.page-header .title {
-  margin: 0;
-  font-size: var(--fs-lg);
-  letter-spacing: 3px;
-  color: var(--c-text-invert);
-  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
-}
-
-.page-header .subtitle {
-  margin: 6px 0 0;
-  font-size: var(--fs-sm);
-  letter-spacing: 10px;
-  color: var(--c-text-invert);
-  opacity: 0.85;
-}
-
-/* 工具栏 */
-.toolbar {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  width: 100%;
-  max-width: 480px;
-}
-
-.toolbar-right {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-/* 游戏主体 */
 .game-area {
-  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0;

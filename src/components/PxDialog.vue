@@ -15,7 +15,7 @@ withDefaults(
     comp?: object | Function | string | null
     compProps?: Record<string, unknown>
     zIndex?: number
-    /** 是否允许通过遮罩 / × 关闭 */
+    /** 是否允许通过遮罩 / ESC 关闭 */
     closable?: boolean
   }>(),
   {
@@ -45,15 +45,6 @@ const hasSlot = computed(() => Boolean(slots.default))
         <!-- 标题栏 -->
         <div class="title-bar">
           <h3 class="title">{{ title }}</h3>
-          <button
-            v-if="closable"
-            type="button"
-            class="close"
-            aria-label="关闭"
-            @click="emit('cancel')"
-          >
-            ×
-          </button>
         </div>
 
         <!-- 内容空间：插槽优先，其次动态组件 -->
@@ -104,8 +95,6 @@ const hasSlot = computed(() => Boolean(slots.default))
 .title-bar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
   padding: 6px 8px;
   background-color: var(--c-dialog-title-bg);
   color: var(--c-dialog-title-text);
@@ -115,24 +104,6 @@ const hasSlot = computed(() => Boolean(slots.default))
   margin: 0;
   font-size: var(--fs-sm);
   letter-spacing: 1px;
-}
-
-.title-bar .close {
-  flex-shrink: 0;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--fs-sm);
-  line-height: 1;
-  color: inherit;
-  border: 1px solid currentColor;
-}
-
-.title-bar .close:hover {
-  color: var(--c-dialog-title-bg);
-  background-color: var(--c-dialog-title-text);
 }
 
 .body {

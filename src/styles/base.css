@@ -91,14 +91,14 @@ button:disabled {
     var(--c-cell-up-dark);
 }
 
-/* 像素按钮：默认凸起，按下/选中凹陷 */
+/* 95 按钮：灰底 + 2px 凹凸边框，按下/选中反色 */
 .px-btn {
   background-color: var(--c-cell-up);
-  border: var(--border-w) solid;
+  border: 2px solid;
   border-color: var(--c-cell-up-light) var(--c-cell-up-dark) var(--c-cell-up-dark)
     var(--c-cell-up-light);
   color: var(--c-text);
-  padding: 6px 10px;
+  padding: 4px 12px;
   font-size: var(--fs-sm);
   line-height: 1;
   user-select: none;
@@ -109,17 +109,48 @@ button:disabled {
   background-color: var(--c-cell-hover);
 }
 
-.px-btn:active:not(:disabled),
+.px-btn:active:not(:disabled) {
+  border-color: var(--c-cell-up-dark) var(--c-cell-up-light) var(--c-cell-up-light)
+    var(--c-cell-up-dark);
+  padding: 5px 11px 3px 13px; /* 内容位移 1px，模拟被按下 */
+}
+
 .px-btn[aria-pressed='true'] {
   background-color: var(--c-cell-press);
   border-color: var(--c-cell-up-dark) var(--c-cell-up-light) var(--c-cell-up-light)
     var(--c-cell-up-dark);
-  padding: 8px 8px 4px 12px; /* 内容位移 2px，模拟被按下 */
 }
 
 .px-btn:disabled {
   color: var(--c-text-dim);
   opacity: 0.6;
+}
+
+/* 95 分组框：细边框 + 标题压在边框上 */
+.w95-group {
+  margin: 0;
+  padding: 10px 12px 12px;
+  border: 1px solid var(--c-group-border);
+  min-width: 0;
+}
+
+.w95-group > legend {
+  padding: 0 4px;
+  font-size: var(--fs-sm);
+  color: var(--c-text);
+}
+
+/* 95 链接 */
+.w95-link {
+  color: var(--c-link);
+  text-decoration: underline;
+  word-break: break-all;
+}
+
+.w95-link--disabled {
+  color: var(--c-link-disabled);
+  text-decoration: underline;
+  cursor: default;
 }
 
 /* 无障碍：仅屏幕阅读器可见 */

@@ -53,6 +53,10 @@
   --c-dialog-title-bg: #05070d;
   --c-dialog-title-text: #d7e0ff;
   --shadow-dialog: 8px 8px 0 rgba(0, 0, 0, 0.8);
+
+  --c-group-border: #3a4463;
+  --c-link: #7aa2ff;
+  --c-link-disabled: #5a6485;
 }
 
 /* ---------------- 彩色：糖果机台 ---------------- */
@@ -104,4 +108,8 @@
   --c-dialog-title-bg: #4527a0;
   --c-dialog-title-text: #ffffff;
   --shadow-dialog: 8px 8px 0 rgba(0, 0, 0, 0.8);
+
+  --c-group-border: #4527a0;
+  --c-link: #2962ff;
+  --c-link-disabled: #8a7bb0;
 }

@@ -17,6 +17,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: 'restart'): void
+  (e: 'options'): void
 }>()
 
 const statusIcon = computed(() => {
@@ -33,13 +34,14 @@ const statusIcon = computed(() => {
       <SevenSegmentCounter :value="remainingMines" />
     </div>
 
-    <!-- 笑脸重开按钮 -->
+    <!-- 笑脸重开按钮：左键重开，右键打开「选项」 -->
     <button
       class="face-btn"
       :class="{ dead: status === 'lost', win: status === 'won' }"
       @click="emit('restart')"
-      aria-label="重新开始"
-      title="重新开始"
+      @contextmenu.prevent="emit('options')"
+      aria-label="重新开始，右键打开选项"
+      title="左键重开 · 右键选项"
     >
       <template v-if="statusIcon === 'smile'"><IconFaceSmile /></template>
       <template v-else-if="statusIcon === 'dead'"><IconFaceDead /></template>

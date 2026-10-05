@@ -1,6 +1,6 @@
 <script setup lang="ts">
 /**
- * 音效开关按钮：按开关状态切换喇叭图标并向上抛出切换事件。
+ * 音效开关按钮：图标 + 开/关文字，点击即切换。
  */
 import IconSoundOn from './icons/IconSoundOn.vue'
 import IconSoundOff from './icons/IconSoundOff.vue'
@@ -16,22 +16,28 @@ const emit = defineEmits<{
 
 <template>
   <button
+    type="button"
     class="px-btn sound-toggle"
-    :aria-pressed="enabled"
+    role="switch"
+    :aria-checked="enabled"
     :aria-label="enabled ? '音效开启' : '音效关闭'"
     @click="emit('toggle')"
   >
-    <IconSoundOn v-if="enabled" />
-    <IconSoundOff v-else />
+    <IconSoundOn v-if="enabled" class="icon" />
+    <IconSoundOff v-else class="icon" />
+    <span>音效：{{ enabled ? '开' : '关' }}</span>
   </button>
 </template>
 
 <style scoped>
 .sound-toggle {
-  width: 40px;
-  height: 40px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
+  gap: 6px;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
 }
 </style>

@@ -1,13 +1,9 @@
 <script setup lang="ts">
 /**
- * 难度切换按钮组。
+ * 难度按钮组：点击即向上抛出所选难度（用于「新游戏」）。
  */
 import type { DifficultyId } from '@/types/game'
 import { DIFFICULTY_ORDER, DIFFICULTIES } from '@/utils/constants'
-
-defineProps<{
-  current: DifficultyId
-}>()
 
 const emit = defineEmits<{
   (e: 'select', id: DifficultyId): void
@@ -19,9 +15,8 @@ const emit = defineEmits<{
     <button
       v-for="id in DIFFICULTY_ORDER"
       :key="id"
+      type="button"
       class="px-btn"
-      :class="{ active: id === current }"
-      :aria-pressed="id === current"
       @click="emit('select', id)"
     >
       {{ DIFFICULTIES[id].label }}
@@ -32,13 +27,7 @@ const emit = defineEmits<{
 <style scoped>
 .difficulty-select {
   display: flex;
-  gap: 6px;
+  gap: 8px;
   flex-wrap: wrap;
-}
-
-.px-btn.active {
-  background-color: var(--c-accent);
-  color: var(--c-accent-ink);
-  border-color: var(--c-accent-ink) var(--c-accent-ink) var(--c-accent-ink) var(--c-accent-ink);
 }
 </style>

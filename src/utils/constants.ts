@@ -31,7 +31,7 @@ export const MAX_TIME = 999
 
 /** localStorage 键名，带版本号便于将来迁移 */
 export const STORAGE_KEYS = {
-  records: 'minesweeper:records:v1',
+  records: 'minesweeper:records:v2',
   settings: 'minesweeper:settings:v1',
 } as const
 

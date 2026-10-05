@@ -1,3 +1,8 @@
+/**
+ * 主题与音效开关的持久化设置。
+ * 模块级单例：主界面与「选项」弹窗共享同一份状态。
+ * 本 composable 只管理状态，不触碰 DOM；主题写入 <html data-theme> 由 App.vue 负责。
+ */
 import { computed, ref, watch } from 'vue'
 import type { GameSettings, ThemeId } from '@/types/game'
 import { DEFAULT_THEME, STORAGE_KEYS, THEME_ORDER } from '@/utils/constants'
@@ -22,32 +27,26 @@ function normalize(raw: unknown): GameSettings {
   return { theme, soundEnabled }
 }
 
-/**
- * 主题与音效开关的持久化设置。
- *
- * 本 composable 只管理状态，不触碰 DOM；
- * 把主题写到 <html data-theme> 由 UI 层（App.vue）负责。
- */
+const settings = ref<GameSettings>(normalize(readJson<unknown>(STORAGE_KEYS.settings, null)))
+
+const theme = computed(() => settings.value.theme)
+const soundEnabled = computed(() => settings.value.soundEnabled)
+
+function setTheme(next: ThemeId): void {
+  settings.value.theme = next
+}
+
+function setSoundEnabled(next: boolean): void {
+  settings.value.soundEnabled = next
+}
+
+function toggleSound(): void {
+  settings.value.soundEnabled = !settings.value.soundEnabled
+}
+
+// 任何字段变化即写入 localStorage
+watch(settings, (value) => writeJson(STORAGE_KEYS.settings, value), { deep: true })
+
 export function useSettings() {
-  const settings = ref<GameSettings>(normalize(readJson<unknown>(STORAGE_KEYS.settings, null)))
-
-  const theme = computed(() => settings.value.theme)
-  const soundEnabled = computed(() => settings.value.soundEnabled)
-
-  function setTheme(next: ThemeId): void {
-    settings.value.theme = next
-  }
-
-  function setSoundEnabled(next: boolean): void {
-    settings.value.soundEnabled = next
-  }
-
-  function toggleSound(): void {
-    settings.value.soundEnabled = !settings.value.soundEnabled
-  }
-
-  // 任何字段变化即写入 localStorage
-  watch(settings, (value) => writeJson(STORAGE_KEYS.settings, value), { deep: true })
-
   return { settings, theme, soundEnabled, setTheme, setSoundEnabled, toggleSound }
 }
