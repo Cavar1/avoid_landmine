@@ -4,6 +4,12 @@
  * 所有尺寸均为整数像素，避免半像素模糊。
  * ============================================================ */
 
+@font-face {
+  font-family: 'Unifont';
+  src: url('/font/unifont.otf') format('opentype');
+  font-display: swap;
+}
+
 :root {
   /* ---------- 尺寸 ---------- */
   --cell-size: 24px; /* 单格边长，运行时由 JS 按屏幕宽度覆写 */
@@ -14,7 +20,7 @@
   --radius: 0px; /* 像素风一律直角 */
 
   /* ---------- 字体 ---------- */
-  --font-pixel: 'Press Start 2P', 'Courier New', ui-monospace, 'Consolas', monospace;
+  --font-pixel: 'Unifont', 'Press Start 2P', 'Courier New', ui-monospace, 'Consolas', monospace;
   --fs-xs: 8px;
   --fs-sm: 10px;
   --fs-md: 12px;
@@ -55,6 +61,7 @@
   --c-question: #1a1a1a;
   --c-face: #ffd93b;
   --c-face-ink: #1a1a1a;
+  --c-face-light: #f4f4f4;
 
   /* ---------- 数字 1-8（经典配色） ---------- */
   --c-1: #0000ff;
