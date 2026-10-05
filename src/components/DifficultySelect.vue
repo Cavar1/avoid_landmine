@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * 难度切换按钮组。
+ */
 import type { DifficultyId } from '@/types/game'
 import { DIFFICULTY_ORDER, DIFFICULTIES } from '@/utils/constants'
 

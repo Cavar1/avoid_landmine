@@ -1,3 +1,6 @@
+/**
+ * 全局常量：难度配置、主题表、计时上限、存储键名与数字配色。
+ */
 import type { Difficulty, DifficultyId, ThemeId } from '@/types/game'
 
 /** 三档难度（对齐经典 Windows 扫雷） */

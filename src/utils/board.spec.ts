@@ -1,3 +1,6 @@
+/**
+ * 棋盘纯逻辑单元测试：布雷安全性、相邻雷计数、洪泛展开与胜负判定。
+ */
 import { describe, expect, it } from 'vitest'
 import type { Cell } from '@/types/game'
 import {

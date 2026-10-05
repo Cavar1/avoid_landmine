@@ -1,3 +1,7 @@
+/**
+ * 全局类型定义：格子、游戏状态、难度、主题与持久化设置。
+ */
+
 /** 单元格状态：未翻开 / 已翻开 / 插旗 / 问号 */
 export type CellState = 'hidden' | 'revealed' | 'flagged' | 'questioned'
 

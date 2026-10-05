@@ -1,3 +1,6 @@
+/**
+ * 扫雷核心状态机单元测试：初始状态、翻开、插旗与胜负流程。
+ */
 import { describe, expect, it, vi } from 'vitest'
 import type { Cell } from '@/types/game'
 import { useMinesweeper } from '@/composables/useMinesweeper'

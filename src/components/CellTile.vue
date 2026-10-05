@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * 单个棋盘格子：按状态渲染数字/旗/问号/雷，并对外抛出翻开与标记事件。
+ */
 import { computed } from 'vue'
 import type { Cell } from '@/types/game'
 import IconFlag from './icons/IconFlag.vue'

@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * 顶部信息栏：剩余雷数、笑脸重开按钮与计时数码管。
+ */
 import { computed } from 'vue'
 import type { GameStatus } from '@/types/game'
 import IconFaceSmile from './icons/IconFaceSmile.vue'

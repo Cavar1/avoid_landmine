@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * 胜负结算浮层：显示胜利/失败横幅并提示是否刷新纪录，提供再来一局按钮。
+ */
 import type { GameStatus } from '@/types/game'
 
 defineProps<{

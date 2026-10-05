@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * 主题切换按钮组。
+ */
 import type { ThemeId } from '@/types/game'
 import { THEME_ORDER, THEME_LABELS } from '@/utils/constants'
 

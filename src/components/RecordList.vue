@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * 记录列表：展示三档难度各自的最佳用时。
+ */
 import type { BestRecords } from '@/types/game'
 import { DIFFICULTY_ORDER, DIFFICULTIES } from '@/utils/constants'
 

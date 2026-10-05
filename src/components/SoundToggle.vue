@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * 音效开关按钮：按开关状态切换喇叭图标并向上抛出切换事件。
+ */
 import IconSoundOn from './icons/IconSoundOn.vue'
 import IconSoundOff from './icons/IconSoundOff.vue'
 

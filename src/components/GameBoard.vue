@@ -1,4 +1,7 @@
 <script setup lang="ts">
+/**
+ * 棋盘容器：按行列渲染 CellTile 网格，并向上转发翻开与标记事件。
+ */
 import type { Cell } from '@/types/game'
 import CellTile from './CellTile.vue'
 
