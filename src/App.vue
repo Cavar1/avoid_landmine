@@ -223,7 +223,7 @@ onMounted(() => {
 .board-wrap {
   overflow-x: auto;
   max-width: 100vw;
-  padding: 4px;
+  padding-top: 4px;
 }
 
 /* 棋盘滚动条像素化 */
