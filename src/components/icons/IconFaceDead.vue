@@ -9,7 +9,6 @@
     <!-- 脸底色 -->
     <rect x="1" y="1" width="14" height="14" fill="var(--c-face, #ffd93b)" />
     <!-- 左 X -->
-    <!-- 左眼的 X，由独立的小方块组成 -->
     <rect x="4" y="4" width="1" height="1" fill="var(--c-face-ink, #1a1a1a)" />
     <rect x="6" y="4" width="1" height="1" fill="var(--c-face-ink, #1a1a1a)" />
     <rect x="5" y="5" width="1" height="1" fill="var(--c-face-ink, #1a1a1a)" />
@@ -22,8 +21,8 @@
     <rect x="9" y="6" width="1" height="1" fill="var(--c-face-ink, #1a1a1a)" />
     <rect x="11" y="6" width="1" height="1" fill="var(--c-face-ink, #1a1a1a)" />
     <!-- 向下嘴巴 -->
-    <rect x="4" y="9" width="8" height="2" fill="var(--c-face-ink, #1a1a1a)" />
-    <rect x="3" y="10" width="2" height="2" fill="var(--c-face-ink, #1a1a1a)" />
-    <rect x="11" y="10" width="2" height="2" fill="var(--c-face-ink, #1a1a1a)" />
+    <rect x="4" y="10" width="8" height="1" fill="var(--c-face-ink, #1a1a1a)" />
+    <rect x="3" y="11" width="1" height="1" fill="var(--c-face-ink, #1a1a1a)" />
+    <rect x="12" y="11" width="1" height="1" fill="var(--c-face-ink, #1a1a1a)" />
   </svg>
 </template>

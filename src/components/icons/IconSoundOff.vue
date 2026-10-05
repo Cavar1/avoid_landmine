@@ -8,15 +8,11 @@
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true">
     <!-- 喇叭身 -->
     <path fill="var(--c-text, #1a1a1a)" d="M3 5h3v6H3zM6 3h2v10H6z" />
-    <!-- 喇叭口 -->
-    <path
-      fill="var(--c-text, #1a1a1a)"
-      d="M8 1h2v2H8zm2 2h2v2h-2zm2 2h1v6h-1zm-1 6h2v2h-2zm-2 2h2v2H8z"
-    />
     <!-- 叉号 -->
-    <path
-      fill="var(--c-lose, #dc2626)"
-      d="M12 3h2v1h-2zm1 1h1v1h-1zm-1 2h2v1h-2zm1 1h1v1h-1zm-1 2h2v1h-2zm1 1h1v1h-1zm-1 2h2v1h-2z"
-    />
+    <rect x="10" y="5" width="2" height="2" fill="var(--c-flag, #d81b1b)" />
+    <rect x="14" y="5" width="2" height="2" fill="var(--c-flag, #d81b1b)" />
+    <rect x="12" y="7" width="2" height="2" fill="var(--c-flag, #d81b1b)" />
+    <rect x="10" y="9" width="2" height="2" fill="var(--c-flag, #d81b1b)" />
+    <rect x="14" y="9" width="2" height="2" fill="var(--c-flag, #d81b1b)" />
   </svg>
 </template>
