@@ -1,6 +1,6 @@
 {
   "name": "avoid-landmine",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "description": "像素风扫雷网页游戏 (Vue 3 + TypeScript + Vite)",

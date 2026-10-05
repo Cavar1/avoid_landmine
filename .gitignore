@@ -1,4 +1,4 @@
 node_modules
-.agent
+.agent/plan
 dist
 pnpm-lock.yaml
