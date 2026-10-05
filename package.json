@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "description": "像素风扫雷网页游戏 (Vue 3 + TypeScript + Vite)",
+  "packageManager": "pnpm@12.6.0",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit -p tsconfig.json && vite build",
