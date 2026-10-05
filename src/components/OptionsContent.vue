@@ -72,7 +72,14 @@ const GAMEPLAY =
         <GroupBox class="sub" title="更多信息">
           <div class="info-item">
             <p class="info-title">扫雷的源代码</p>
-            <p class="info-link w95-link--disabled">（暂未提供）</p>
+            <a
+              class="info-link w95-link"
+              href="https://github.com/Cavar1/avoid_landmine"
+              target="_blank"
+              rel="noopener"
+            >
+              https://github.com/Cavar1/avoid_landmine
+            </a>
           </div>
           <div class="info-item">
             <p class="info-title">作者</p>
