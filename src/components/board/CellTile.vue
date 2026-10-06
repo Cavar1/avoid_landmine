@@ -4,9 +4,9 @@
  */
 import { computed } from 'vue'
 import type { Cell } from '@/types/game'
-import IconFlag from './icons/IconFlag.vue'
-import IconQuestion from './icons/IconQuestion.vue'
-import IconMine from './icons/IconMine.vue'
+import IconFlag from '@/components/icons/IconFlag.vue'
+import IconQuestion from '@/components/icons/IconQuestion.vue'
+import IconMine from '@/components/icons/IconMine.vue'
 
 const props = defineProps<{
   cell: Cell

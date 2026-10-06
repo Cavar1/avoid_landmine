@@ -2,8 +2,8 @@
 /**
  * 音效开关按钮：图标 + 开/关文字，点击即切换。
  */
-import IconSoundOn from './icons/IconSoundOn.vue'
-import IconSoundOff from './icons/IconSoundOff.vue'
+import IconSoundOn from '@/components/icons/IconSoundOn.vue'
+import IconSoundOff from '@/components/icons/IconSoundOff.vue'
 
 defineProps<{
   enabled: boolean

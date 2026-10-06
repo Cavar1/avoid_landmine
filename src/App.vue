@@ -10,10 +10,10 @@ import { useSound } from '@/composables/useSound'
 import { useRecords } from '@/composables/useRecords'
 import { useSettings } from '@/composables/useSettings'
 import { useDialogs } from '@/composables/useDialogs'
-import GameBoard from '@/components/GameBoard.vue'
-import GameHeader from '@/components/GameHeader.vue'
-import DialogHost from '@/components/DialogHost.vue'
-import OptionsContent from '@/components/OptionsContent.vue'
+import GameBoard from '@/components/board/GameBoard.vue'
+import GameHeader from '@/components/header/GameHeader.vue'
+import DialogHost from '@/components/dialog/DialogHost.vue'
+import OptionsContent from '@/components/options/OptionsContent.vue'
 
 // ============================================================
 // 组装核心 composables

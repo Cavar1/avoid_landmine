@@ -4,9 +4,9 @@
  */
 import { computed } from 'vue'
 import type { GameStatus } from '@/types/game'
-import IconFaceSmile from './icons/IconFaceSmile.vue'
-import IconFaceDead from './icons/IconFaceDead.vue'
-import IconFaceWin from './icons/IconFaceWin.vue'
+import IconFaceSmile from '@/components/icons/IconFaceSmile.vue'
+import IconFaceDead from '@/components/icons/IconFaceDead.vue'
+import IconFaceWin from '@/components/icons/IconFaceWin.vue'
 import SevenSegmentCounter from './SevenSegmentCounter.vue'
 
 const props = defineProps<{

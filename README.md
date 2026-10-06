@@ -47,7 +47,11 @@ src/
 ├─ types/             # 游戏相关类型定义
 ├─ utils/             # 棋盘纯函数、常量、存储封装
 ├─ composables/       # 游戏状态机、计时、音效、记录、设置、弹窗管理
-├─ components/        # 棋盘、格子、头部、数码管、弹窗与各类按钮
+├─ components/        # 按职责分层：board / header / dialog / options / icons
+│  ├─ board/          # 棋盘与格子
+│  ├─ header/         # 顶部信息栏与数码管
+│  ├─ dialog/         # 通用弹窗外壳与挂载点
+│  ├─ options/        # 「选项」弹窗内容与弹窗内控件
 │  └─ icons/          # 手写 SVG 图标组件
 └─ styles/            # CSS 变量、三套主题、公共基元
 ```

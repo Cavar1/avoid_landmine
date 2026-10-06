@@ -12,7 +12,7 @@ import RecordList from './RecordList.vue'
 import DifficultySelect from './DifficultySelect.vue'
 import ThemeSwitch from './ThemeSwitch.vue'
 import SoundToggle from './SoundToggle.vue'
-import IconMine from './icons/IconMine.vue'
+import IconMine from '@/components/icons/IconMine.vue'
 
 const emit = defineEmits<{
   (e: 'newGame', id: DifficultyId): void
