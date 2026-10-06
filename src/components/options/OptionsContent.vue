@@ -32,14 +32,11 @@ const TABS = computed(() => [
   { id: 'about', label: t('options.about') },
 ])
 
-/** 英文文案更长，弹窗加宽，避免选项卡与战绩表被挤压 */
-const isEnglish = computed(() => locale.value === 'en-US')
-
 const active = ref('records')
 </script>
 
 <template>
-  <div class="options" :class="{ 'options--en': isEnglish }">
+  <div class="options">
     <TabStrip :tabs="TABS" :active="active" @select="active = $event" />
 
     <div class="tab-panel w95-tab-panel">
@@ -103,17 +100,12 @@ const active = ref('records')
 .options {
   display: flex;
   flex-direction: column;
-  width: 320px;
-}
-
-/* 英文文案（Intermediate / New Game / Played…）更长，加宽避免选项卡与战绩表被挤压 */
-.options--en {
   width: 420px;
 }
 
 /* 内容面板固定最小高度：切换标签时弹窗不跳变 */
 .tab-panel {
-  min-height: 200px;
+  min-height: 280px;
 }
 
 .sub {

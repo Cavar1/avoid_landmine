@@ -3,7 +3,6 @@
  * 页面装配：只保留游戏头部与棋盘，其余功能收进右键弹出的「选项」弹窗。
  */
 import { computed, onMounted, watch } from 'vue'
-import { useI18n } from 'vue-i18n'
 import type { DifficultyId } from '@/types/game'
 import { i18n } from '@/i18n'
 import { useMinesweeper } from '@/composables/useMinesweeper'
@@ -25,7 +24,6 @@ const settings = useSettings()
 const records = useRecords()
 const sound = useSound()
 const timer = useTimer()
-const { t } = useI18n()
 
 const game = useMinesweeper({
   onFirstReveal: (difficulty) => {
@@ -64,9 +62,9 @@ let optionsDialogId: number | null = null
 
 function handleOpenOptions(): void {
   optionsDialogId = openDialog({
-    title: t('options.title'),
+    titleKey: 'options.title',
     kind: 'info',
-    confirmText: t('common.close'),
+    confirmKey: 'common.close',
     comp: OptionsContent,
     compProps: { onNewGame: handleNewGame },
     onConfirm: () => {

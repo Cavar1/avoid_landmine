@@ -107,7 +107,8 @@ App.vue         装配层：接线、把 settings.theme 同步到 <html data-the
 2. **逻辑层不认识表现层**：`useMinesweeper` 通过 `MinesweeperEvents` 回调（`onFirstReveal` / `onReveal` / `onFlagToggle` / `onMineHit` / `onWin` / `onRestart`）通知事件，音效、计时、战绩都在 `App.vue` 里接。
 3. **跨组件共享的状态用模块级单例 composable**（`useRecords` / `useSettings` / `useDialogs` 都是把 `ref` 提到模块作用域再 `export function useXxx()` 返回）。新增这类共享状态时**照抄这个模式**，不要每次调用新建实例。
 4. **composable 只管状态，不碰 DOM**（如 `useSettings` 不写 `data-theme`，由 `App.vue` 的 `watch` 负责）。
-5. 弹窗用命令式：`useDialogs().open({ title, kind, comp, compProps, onConfirm })`，组件对象会被 `markRaw` 包裹；`DialogHost` 在 `App.vue` 挂一次。
+5. 弹窗用命令式：`useDialogs().open({ titleKey, kind, comp, compProps, onConfirm })`，组件对象会被 `markRaw` 包裹；`DialogHost` 在 `App.vue` 挂一次。
+6. **弹窗文案传 i18n key 而不是译文**：`titleKey` / `confirmKey` / `cancelKey` 存进 `DialogItem`，由 `PxDialog` 在渲染时用 `t()` 解析。若在 `open()` 时就 `t()` 掉，拿到的是快照字符串，弹窗开着切语言不会实时更新。
 
 ## 开发规范
 
