@@ -64,11 +64,19 @@ minesweeper/
    │  ├─ useSettings.ts            # 主题与音效开关——模块级单例
    │  └─ useDialogs.ts             # 弹窗数组管理（open / close / confirm）——模块级单例
    ├─ components/
-   │  ├─ GameBoard.vue  CellTile.vue  GameHeader.vue
-   │  ├─ SevenSegmentDigit.vue  SevenSegmentCounter.vue   # 数码管（SVG 7 段）
-   │  ├─ PxDialog.vue  DialogHost.vue                     # 通用弹窗外壳与挂载点
-   │  ├─ OptionsContent.vue  TabStrip.vue  GroupBox.vue   # 选项弹窗与 95 基元组件
-   │  ├─ RecordList.vue  DifficultySelect.vue  ThemeSwitch.vue  SoundToggle.vue
+   │  ├─ board/                    # 棋盘区域
+   │  │  ├─ GameBoard.vue
+   │  │  └─ CellTile.vue
+   │  ├─ header/                   # 顶部信息栏 + 数码管（SVG 7 段）
+   │  │  ├─ GameHeader.vue
+   │  │  ├─ SevenSegmentCounter.vue
+   │  │  └─ SevenSegmentDigit.vue
+   │  ├─ dialog/                   # 通用弹窗外壳与挂载点
+   │  │  ├─ PxDialog.vue
+   │  │  └─ DialogHost.vue
+   │  ├─ options/                  # 「选项」弹窗内容、95 基元与弹窗内控件
+   │  │  ├─ OptionsContent.vue  TabStrip.vue  GroupBox.vue
+   │  │  └─ RecordList.vue  DifficultySelect.vue  ThemeSwitch.vue  SoundToggle.vue
    │  └─ icons/                    # IconMine / IconFlag / IconQuestion /
    │                               # IconFaceSmile|Dead|Win / IconStopwatch / IconSoundOn|Off
    └─ styles/
@@ -110,7 +118,7 @@ App.vue         装配层：接线、把 settings.theme 同步到 <html data-the
 - 每个代码文件（`.ts` / `.vue`）**开头写块注释，一两句说清这个文件干什么**。
 - 行内注释只解释「为什么」，不解释「是什么」。
 
-**组件写法**（见 [GameHeader.vue](src/components/GameHeader.vue)、[TabStrip.vue](src/components/TabStrip.vue)）
+**组件写法**（见 [GameHeader.vue](src/components/header/GameHeader.vue)、[TabStrip.vue](src/components/options/TabStrip.vue)）
 
 - `<script setup lang="ts">` + 泛型 `defineProps<{...}>()` + 调用签名的 `defineEmits`。
 - 呈现型组件保持"哑"：不自己读写全局状态，靠 props / emit。
