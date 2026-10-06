@@ -74,11 +74,11 @@ const GAMEPLAY =
             <p class="info-title">扫雷的源代码</p>
             <a
               class="info-link w95-link"
-              href="https://github.com/Cavar1/avoid_landmine"
+              href="https://github.com/Cavar1/minesweeper"
               target="_blank"
               rel="noopener"
             >
-              https://github.com/Cavar1/avoid_landmine
+              https://github.com/Cavar1/minesweeper
             </a>
           </div>
           <div class="info-item">

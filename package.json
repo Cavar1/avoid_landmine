@@ -1,9 +1,9 @@
 {
-  "name": "avoid-landmine",
-  "version": "1.0.0",
+  "name": "minesweeper",
+  "version": "1.0.1",
   "private": true,
   "type": "module",
-  "description": "像素风扫雷网页游戏 (Vue 3 + TypeScript + Vite)",
+  "description": "像素风扫雷网页游戏",
   "packageManager": "pnpm@12.6.0",
   "scripts": {
     "dev": "vite",

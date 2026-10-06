@@ -1,8 +1,8 @@
-# AVOID LANDMINE · 扫雷
+# 扫雷
 
 一个跑在浏览器里的经典扫雷游戏，**像素风 + Windows 95 复古外观**。纯前端单页应用，没有后端、没有排行榜，打开就能玩。
 
-**在线试玩：<https://landmine.cavar.dev>**
+**在线试玩：<https://mines.cavar.dev>**
 
 ## 玩法与特色
 
