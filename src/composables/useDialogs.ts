@@ -1,5 +1,8 @@
 /**
  * 弹窗管理：用模块级数组保存所有弹窗，支持命令式弹出多个。
+ *
+ * 文案字段一律存 **i18n key**（不是已翻译的字符串）：翻译推迟到 PxDialog 渲染时进行，
+ * 这样弹窗开着的时候切换语言，标题与按钮也会实时更新。
  */
 import { markRaw, ref } from 'vue'
 
@@ -10,14 +13,14 @@ export type DialogKind = 'confirm' | 'info'
 export type DialogComponent = object | Function
 
 export interface DialogOptions {
-  /** 标题，默认「提示」 */
-  title?: string
+  /** 标题的 i18n key，默认 'common.prompt' */
+  titleKey?: string
   /** 形态，默认 info */
   kind?: DialogKind
-  /** 确定按钮文案，默认「确定」 */
-  confirmText?: string
-  /** 取消按钮文案，默认「取消」 */
-  cancelText?: string
+  /** 确定按钮的 i18n key，默认 'common.confirm' */
+  confirmKey?: string
+  /** 取消按钮的 i18n key，默认 'common.cancel' */
+  cancelKey?: string
   /** 内容区插入的组件（有默认插槽时以插槽为准） */
   comp?: DialogComponent | null
   /** 传给内容组件的 props */
@@ -32,10 +35,10 @@ export interface DialogOptions {
 
 export interface DialogItem {
   id: number
-  title: string
+  titleKey: string
   kind: DialogKind
-  confirmText: string
-  cancelText: string
+  confirmKey: string
+  cancelKey: string
   comp: DialogComponent | null
   compProps: Record<string, unknown>
   closable: boolean
@@ -62,10 +65,10 @@ function open(options: DialogOptions = {}): number {
   const id = ++seed
   dialogs.value.push({
     id,
-    title: options.title ?? '提示',
+    titleKey: options.titleKey ?? 'common.prompt',
     kind: options.kind ?? 'info',
-    confirmText: options.confirmText ?? '确定',
-    cancelText: options.cancelText ?? '取消',
+    confirmKey: options.confirmKey ?? 'common.confirm',
+    cancelKey: options.cancelKey ?? 'common.cancel',
     // markRaw 避免组件对象被响应式深度代理
     comp: options.comp ? (markRaw(options.comp) as DialogComponent) : null,
     compProps: options.compProps ?? {},

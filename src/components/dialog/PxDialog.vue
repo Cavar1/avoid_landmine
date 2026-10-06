@@ -3,14 +3,18 @@
  * 通用像素弹窗外壳：标题栏 + 可插组件的内容区 + 询问/信息两种按钮形态。
  */
 import { computed, useSlots } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
-    title: string
+    /** 标题的 i18n key */
+    titleKey: string
     /** confirm = 询问（取消 + 确定）；info = 信息（仅确定） */
     kind?: 'confirm' | 'info'
-    confirmText?: string
-    cancelText?: string
+    /** 确定按钮的 i18n key */
+    confirmKey?: string
+    /** 取消按钮的 i18n key */
+    cancelKey?: string
     /** 内容组件（无默认插槽时使用，配合命令式调用） */
     comp?: object | Function | string | null
     compProps?: Record<string, unknown>
@@ -20,8 +24,8 @@ withDefaults(
   }>(),
   {
     kind: 'info',
-    confirmText: '确定',
-    cancelText: '取消',
+    confirmKey: 'common.confirm',
+    cancelKey: 'common.cancel',
     comp: null,
     compProps: () => ({}),
     zIndex: 1000,
@@ -34,6 +38,13 @@ const emit = defineEmits<{
   (e: 'cancel'): void
 }>()
 
+const { t } = useI18n()
+
+// 在渲染时（而非 open 时）才解析 key：t() 会订阅 locale，语言一变就实时重算
+const titleText = computed(() => t(props.titleKey))
+const confirmText = computed(() => t(props.confirmKey))
+const cancelText = computed(() => t(props.cancelKey))
+
 const slots = useSlots()
 const hasSlot = computed(() => Boolean(slots.default))
 </script>
@@ -44,7 +55,7 @@ const hasSlot = computed(() => Boolean(slots.default))
       <div class="panel px-frame" role="dialog" aria-modal="true">
         <!-- 标题栏 -->
         <div class="title-bar">
-          <h3 class="title">{{ title }}</h3>
+          <h3 class="title">{{ titleText }}</h3>
         </div>
 
         <!-- 内容空间：插槽优先，其次动态组件 -->

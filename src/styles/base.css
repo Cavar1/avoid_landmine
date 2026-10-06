@@ -98,7 +98,7 @@ button:disabled {
   border-color: var(--c-cell-up-light) var(--c-cell-up-dark) var(--c-cell-up-dark)
     var(--c-cell-up-light);
   color: var(--c-text);
-  padding: 4px 12px;
+  padding: 6px 14px;
   font-size: var(--fs-sm);
   line-height: 1;
   user-select: none;
@@ -112,7 +112,7 @@ button:disabled {
 .px-btn:active:not(:disabled) {
   border-color: var(--c-cell-up-dark) var(--c-cell-up-light) var(--c-cell-up-light)
     var(--c-cell-up-dark);
-  padding: 5px 11px 3px 13px; /* 内容位移 1px，模拟被按下 */
+  padding: 7px 13px 5px 15px; /* 内容位移 1px，模拟被按下 */
 }
 
 .px-btn[aria-pressed='true'] {
@@ -129,7 +129,7 @@ button:disabled {
 /* 95 分组框：细边框 + 标题压在边框上 */
 .w95-group {
   margin: 0;
-  padding: 10px 12px 12px;
+  padding: 12px 14px 14px;
   border: 1px solid var(--c-group-border);
   min-width: 0;
 }

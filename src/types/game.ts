@@ -14,6 +14,9 @@ export type DifficultyId = 'beginner' | 'intermediate' | 'expert'
 /** 主题标识 */
 export type ThemeId = 'classic' | 'dark' | 'vivid'
 
+/** 界面语言标识 */
+export type LocaleId = 'zh-CN' | 'en-US'
+
 /** 单个格子 */
 export interface Cell {
   row: number
@@ -29,10 +32,9 @@ export interface Cell {
   isWrongFlag: boolean
 }
 
-/** 难度配置 */
+/** 难度配置（展示名由 i18n 的 difficulty.* 提供） */
 export interface Difficulty {
   id: DifficultyId
-  label: string
   rows: number
   cols: number
   mines: number
@@ -57,4 +59,5 @@ export type GameRecords = Record<DifficultyId, DifficultyRecord>
 export interface GameSettings {
   theme: ThemeId
   soundEnabled: boolean
+  locale: LocaleId
 }

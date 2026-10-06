@@ -2,8 +2,9 @@
 /**
  * 主题切换按钮组。
  */
+import { useI18n } from 'vue-i18n'
 import type { ThemeId } from '@/types/game'
-import { THEME_ORDER, THEME_LABELS } from '@/utils/constants'
+import { THEME_ORDER } from '@/utils/constants'
 
 defineProps<{
   current: ThemeId
@@ -12,10 +13,12 @@ defineProps<{
 const emit = defineEmits<{
   (e: 'select', theme: ThemeId): void
 }>()
+
+const { t } = useI18n()
 </script>
 
 <template>
-  <div class="theme-switch" role="group" aria-label="选择主题">
+  <div class="theme-switch" role="group" :aria-label="t('select.theme')">
     <button
       v-for="theme in THEME_ORDER"
       :key="theme"
@@ -24,7 +27,7 @@ const emit = defineEmits<{
       :aria-pressed="theme === current"
       @click="emit('select', theme)"
     >
-      {{ THEME_LABELS[theme] }}
+      {{ t(`theme.${theme}`) }}
     </button>
   </div>
 </template>

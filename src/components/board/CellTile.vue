@@ -110,7 +110,7 @@ const numberColor = computed(() => {
 }
 
 .number {
-  font-weight: bold;
+  font-family: var(--font-number);
   font-size: calc(var(--cell-size, 24px) * 0.58);
   user-select: none;
 }

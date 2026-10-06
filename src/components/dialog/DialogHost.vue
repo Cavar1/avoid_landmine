@@ -23,10 +23,10 @@ onBeforeUnmount(() => window.removeEventListener('keydown', handleKeydown))
   <PxDialog
     v-for="dialog in dialogs"
     :key="dialog.id"
-    :title="dialog.title"
+    :title-key="dialog.titleKey"
     :kind="dialog.kind"
-    :confirm-text="dialog.confirmText"
-    :cancel-text="dialog.cancelText"
+    :confirm-key="dialog.confirmKey"
+    :cancel-key="dialog.cancelKey"
     :comp="dialog.comp"
     :comp-props="dialog.compProps"
     :z-index="dialog.zIndex"
