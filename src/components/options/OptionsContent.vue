@@ -2,7 +2,8 @@
 /**
  * 「选项」弹窗内容：按选项卡分「游戏记录 / 新游戏 / 设定与偏好 / 关于扫雷」四大分类。
  */
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import type { DifficultyId } from '@/types/game'
 import { useRecords } from '@/composables/useRecords'
 import { useSettings } from '@/composables/useSettings'
@@ -12,6 +13,7 @@ import RecordList from './RecordList.vue'
 import DifficultySelect from './DifficultySelect.vue'
 import ThemeSwitch from './ThemeSwitch.vue'
 import SoundToggle from './SoundToggle.vue'
+import LanguageSwitch from './LanguageSwitch.vue'
 import IconMine from '@/components/icons/IconMine.vue'
 
 const emit = defineEmits<{
@@ -19,24 +21,25 @@ const emit = defineEmits<{
 }>()
 
 const { records } = useRecords()
-const { theme, soundEnabled, setTheme, toggleSound } = useSettings()
+const { theme, soundEnabled, locale, setTheme, toggleSound, setLocale } = useSettings()
+const { t } = useI18n()
 
-/** 四个大分类，标签名即原分组标题 */
-const TABS: readonly { id: string; label: string }[] = [
-  { id: 'records', label: '游戏记录' },
-  { id: 'newgame', label: '新游戏' },
-  { id: 'settings', label: '设定与偏好' },
-  { id: 'about', label: '关于扫雷' },
-]
+/** 四个大分类，标签名即原分组标题；随语言变化，故用 computed */
+const TABS = computed(() => [
+  { id: 'records', label: t('options.records') },
+  { id: 'newgame', label: t('options.newGame') },
+  { id: 'settings', label: t('options.settings') },
+  { id: 'about', label: t('options.about') },
+])
+
+/** 英文文案更长，弹窗加宽，避免选项卡与战绩表被挤压 */
+const isEnglish = computed(() => locale.value === 'en-US')
 
 const active = ref('records')
-
-const GAMEPLAY =
-  '格子下面埋设了不少地雷，走一步看一步，利用安全区的线索，识破并绕开那些可怕的地雷，直到排除所有安全区，即可赢得游戏胜利。'
 </script>
 
 <template>
-  <div class="options">
+  <div class="options" :class="{ 'options--en': isEnglish }">
     <TabStrip :tabs="TABS" :active="active" @select="active = $event" />
 
     <div class="tab-panel w95-tab-panel">
@@ -47,31 +50,34 @@ const GAMEPLAY =
 
       <!-- 新游戏 -->
       <section v-else-if="active === 'newgame'" role="tabpanel">
-        <p class="hint">点击以下选项，将立即开启新游戏，并放弃本局游戏。</p>
+        <p class="hint">{{ t('newGame.hint') }}</p>
         <DifficultySelect @select="emit('newGame', $event)" />
       </section>
 
       <!-- 设定与偏好 -->
       <section v-else-if="active === 'settings'" role="tabpanel">
-        <GroupBox title="主题">
+        <GroupBox :title="t('settings.theme')">
           <ThemeSwitch :current="theme" @select="setTheme" />
         </GroupBox>
-        <GroupBox class="sub" title="声音">
+        <GroupBox class="sub" :title="t('settings.sound')">
           <SoundToggle :enabled="soundEnabled" @toggle="toggleSound" />
+        </GroupBox>
+        <GroupBox class="sub" :title="t('settings.language')">
+          <LanguageSwitch :current="locale" @select="setLocale" />
         </GroupBox>
       </section>
 
       <!-- 关于扫雷 -->
       <section v-else role="tabpanel">
-        <GroupBox title="玩法">
+        <GroupBox :title="t('about.gameplayTitle')">
           <div class="gameplay">
             <IconMine class="gameplay-icon" />
-            <p class="gameplay-text">{{ GAMEPLAY }}</p>
+            <p class="gameplay-text">{{ t('about.gameplay') }}</p>
           </div>
         </GroupBox>
-        <GroupBox class="sub" title="更多信息">
+        <GroupBox class="sub" :title="t('about.moreInfo')">
           <div class="info-item">
-            <p class="info-title">扫雷的源代码</p>
+            <p class="info-title">{{ t('about.sourceCode') }}</p>
             <a
               class="info-link w95-link"
               href="https://github.com/Cavar1/minesweeper"
@@ -82,7 +88,7 @@ const GAMEPLAY =
             </a>
           </div>
           <div class="info-item">
-            <p class="info-title">作者</p>
+            <p class="info-title">{{ t('about.author') }}</p>
             <a class="info-link w95-link" href="https://cavar.dev" target="_blank" rel="noopener">
               https://cavar.dev
             </a>
@@ -98,6 +104,11 @@ const GAMEPLAY =
   display: flex;
   flex-direction: column;
   width: 320px;
+}
+
+/* 英文文案（Intermediate / New Game / Played…）更长，加宽避免选项卡与战绩表被挤压 */
+.options--en {
+  width: 420px;
 }
 
 /* 内容面板固定最小高度：切换标签时弹窗不跳变 */

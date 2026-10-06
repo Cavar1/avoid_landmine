@@ -1,13 +1,13 @@
 /**
- * 全局常量：难度配置、主题表、计时上限、存储键名与数字配色。
+ * 全局常量：难度配置、主题与语言表、计时上限、存储键名与数字配色。
  */
-import type { Difficulty, DifficultyId, ThemeId } from '@/types/game'
+import type { Difficulty, DifficultyId, LocaleId, ThemeId } from '@/types/game'
 
-/** 三档难度（对齐经典 Windows 扫雷） */
+/** 三档难度（对齐经典 Windows 扫雷）；展示名由 i18n 提供 */
 export const DIFFICULTIES: Readonly<Record<DifficultyId, Difficulty>> = {
-  beginner: { id: 'beginner', label: '初级', rows: 9, cols: 9, mines: 10 },
-  intermediate: { id: 'intermediate', label: '中级', rows: 16, cols: 16, mines: 40 },
-  expert: { id: 'expert', label: '高级', rows: 16, cols: 30, mines: 99 },
+  beginner: { id: 'beginner', rows: 9, cols: 9, mines: 10 },
+  intermediate: { id: 'intermediate', rows: 16, cols: 16, mines: 40 },
+  expert: { id: 'expert', rows: 16, cols: 30, mines: 99 },
 }
 
 /** 难度展示顺序 */
@@ -18,13 +18,16 @@ export const DEFAULT_DIFFICULTY: DifficultyId = 'beginner'
 /** 主题展示顺序 */
 export const THEME_ORDER: readonly ThemeId[] = ['classic', 'dark', 'vivid']
 
-export const THEME_LABELS: Readonly<Record<ThemeId, string>> = {
-  classic: '经典',
-  dark: '暗夜',
-  vivid: '糖果',
-}
-
 export const DEFAULT_THEME: ThemeId = 'classic'
+
+/** 语言展示顺序 */
+export const LOCALE_ORDER: readonly LocaleId[] = ['zh-CN', 'en-US']
+
+/** 语言名一律用母语书写，不随当前语言翻译 */
+export const LOCALE_LABELS: Readonly<Record<LocaleId, string>> = {
+  'zh-CN': '中文',
+  'en-US': 'English',
+}
 
 /** 计时器与数码管上限（超过后停表，与经典行为一致） */
 export const MAX_TIME = 999

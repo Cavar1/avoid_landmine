@@ -3,6 +3,7 @@
  * 顶部信息栏：剩余雷数、笑脸重开按钮与计时数码管。
  */
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import type { GameStatus } from '@/types/game'
 import IconFaceSmile from '@/components/icons/IconFaceSmile.vue'
 import IconFaceDead from '@/components/icons/IconFaceDead.vue'
@@ -20,6 +21,8 @@ const emit = defineEmits<{
   (e: 'options'): void
 }>()
 
+const { t } = useI18n()
+
 const statusIcon = computed(() => {
   if (props.status === 'lost') return 'dead'
   if (props.status === 'won') return 'win'
@@ -30,7 +33,7 @@ const statusIcon = computed(() => {
 <template>
   <header class="header" role="banner">
     <!-- 剩余雷数 -->
-    <div class="counter-cell" aria-label="剩余雷数">
+    <div class="counter-cell" :aria-label="t('header.remainingMines')">
       <SevenSegmentCounter :value="remainingMines" />
     </div>
 
@@ -40,8 +43,8 @@ const statusIcon = computed(() => {
       :class="{ dead: status === 'lost', win: status === 'won' }"
       @click="emit('restart')"
       @contextmenu.prevent="emit('options')"
-      aria-label="重新开始，右键打开选项"
-      title="左键重开 · 右键选项"
+      :aria-label="t('header.restart')"
+      :title="t('header.restartHint')"
     >
       <template v-if="statusIcon === 'smile'"><IconFaceSmile /></template>
       <template v-else-if="statusIcon === 'dead'"><IconFaceDead /></template>
@@ -49,7 +52,7 @@ const statusIcon = computed(() => {
     </button>
 
     <!-- 计时器 -->
-    <div class="counter-cell" aria-label="游戏时间">
+    <div class="counter-cell" :aria-label="t('header.gameTime')">
       <SevenSegmentCounter :value="elapsedSeconds" />
     </div>
   </header>

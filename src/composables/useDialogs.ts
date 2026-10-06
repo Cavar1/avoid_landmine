@@ -2,6 +2,7 @@
  * 弹窗管理：用模块级数组保存所有弹窗，支持命令式弹出多个。
  */
 import { markRaw, ref } from 'vue'
+import { i18n } from '@/i18n'
 
 /** 弹窗形态：询问（双按钮）/ 信息（单按钮） */
 export type DialogKind = 'confirm' | 'info'
@@ -62,10 +63,10 @@ function open(options: DialogOptions = {}): number {
   const id = ++seed
   dialogs.value.push({
     id,
-    title: options.title ?? '提示',
+    title: options.title ?? i18n.global.t('common.prompt'),
     kind: options.kind ?? 'info',
-    confirmText: options.confirmText ?? '确定',
-    cancelText: options.cancelText ?? '取消',
+    confirmText: options.confirmText ?? i18n.global.t('common.confirm'),
+    cancelText: options.cancelText ?? i18n.global.t('common.cancel'),
     // markRaw 避免组件对象被响应式深度代理
     comp: options.comp ? (markRaw(options.comp) as DialogComponent) : null,
     compProps: options.compProps ?? {},

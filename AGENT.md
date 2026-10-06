@@ -27,7 +27,7 @@ pnpm format       # prettier 格式化
 
 ## 技术栈与关键决策
 
-Vue 3.5 + TypeScript + Vite 8，pnpm 管理。**运行时依赖只有 vue**。
+Vue 3.5 + TypeScript + Vite 8，pnpm 管理。**运行时依赖只有 vue 与 vue-i18n**。
 
 | 决策   | 选择                                        | 原因                                 |
 | ------ | ------------------------------------------- | ------------------------------------ |
@@ -37,6 +37,7 @@ Vue 3.5 + TypeScript + Vite 8，pnpm 管理。**运行时依赖只有 vue**。
 | 音频   | Web Audio API 实时合成                      | 不引入任何音频素材文件               |
 | 持久化 | localStorage（`utils/storage.ts` 安全封装） | 不可用时静默退化为内存               |
 | 弹窗   | 自研 `PxDialog` + `useDialogs` 命令式调用   | 统一像素风，避免第三方样式冲突       |
+| 多语言 | **vue-i18n**（中 / 英，`legacy: false`）    | 文案集中管理，切换即时生效并持久化   |
 
 **明确不做**：和弦操作（双击/中键快速展开）、自定义棋盘尺寸、联机/排行榜/用户系统、**任何 UI 组件库（Element Plus 等一律不引入，会破坏像素风）**。
 
@@ -48,11 +49,14 @@ minesweeper/
 ├─ index.html                      # 挂载点 + 像素字体 Press Start 2P
 ├─ vite.config.ts                  # 别名 @ → src
 └─ src/
-   ├─ main.ts                      # 入口：按序引入 variables → themes → base
+   ├─ main.ts                      # 入口：装 i18n，按序引入 variables → themes → base
    ├─ App.vue                      # 页面装配：header + board + DialogHost
-   ├─ types/game.ts                # Cell / GameStatus / Difficulty / GameRecords / ThemeId
+   ├─ i18n/                        # 多语言：createI18n 实例与文案表
+   │  ├─ index.ts                  # 实例装配 + detectBrowserLocale()
+   │  └─ locales/                  # zh-CN.ts（兼作结构基准）/ en-US.ts
+   ├─ types/game.ts                # Cell / GameStatus / Difficulty / GameRecords / ThemeId / LocaleId
    ├─ utils/
-   │  ├─ constants.ts              # 难度表、主题表、插旗上限、storage 键名、数字配色
+   │  ├─ constants.ts              # 难度表、主题/语言表、storage 键名、数字配色
    │  ├─ storage.ts                # localStorage 安全读写（readJson / writeJson）
    │  ├─ board.ts                  # 棋盘纯函数（布雷/邻雷计数/洪泛展开/胜负判定）
    │  └─ board.spec.ts             # 上述纯函数的单测
@@ -137,7 +141,16 @@ App.vue         装配层：接线、把 settings.theme 同步到 <html data-the
 - 只在 `utils/storage.ts` 读写，键名统一放在 `STORAGE_KEYS`（`utils/constants.ts`，**带版本号**，如 `minesweeper:records:v2`）。
 - 从存储读回来的数据**必须先 `normalize`**，非法值静默回退默认，绝不因脏数据把 UI 带崩。
 
+**多语言**
+
+- 文案一律写进 `src/i18n/locales/`，组件里禁止再出现中英文字面量。
+- `zh-CN.ts` 是消息结构基准，`en-US.ts` 用 `const enUS: typeof zhCN` 约束——**缺 key / 多 key 都由 `pnpm typecheck` 拦下**，无需额外测试。
+- 组件内取文案用 `useI18n().t`；非组件处（如 `useDialogs`）用 `i18n.global.t`。
+- `settings.locale` 是语言唯一真源（持久化在 `GameSettings`），`i18n.global.locale` / `<html lang>` / 页面标题都只是它的投影，由 `App.vue` 的 `watch` 同步。
+- 语言名一律以母语书写（`LOCALE_LABELS`），不随当前语言翻译。
+- 英文文案比中文长，新增/修改文案后要在英文下复查弹窗与棋盘**不破版**（`.options--en` 已为英文加宽弹窗）。
+
 ## 验证方式
 
 1. `pnpm typecheck`、`pnpm test`、`pnpm build` 三项零报错。
-2. 浏览器实测（`pnpm dev`）关键路径：三档难度切换、首击必安全、右键三态循环、踩雷翻开全部雷并锁定、胜利记录落盘、右键笑脸弹「选项」且四个选项卡切换不跳变、主题与音效即时生效、窄屏不破版（高级难度可横向滚动）。
+2. 浏览器实测（`pnpm dev`）关键路径：三档难度切换、首击必安全、右键三态循环、踩雷翻开全部雷并锁定、胜利记录落盘、右键笑脸弹「选项」且四个选项卡切换不跳变、主题与音效即时生效、中英切换即时生效并持久化（含 `<html lang>` 与标签页标题）、窄屏不破版（高级难度可横向滚动）。

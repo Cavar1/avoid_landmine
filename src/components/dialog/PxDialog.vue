@@ -3,8 +3,9 @@
  * 通用像素弹窗外壳：标题栏 + 可插组件的内容区 + 询问/信息两种按钮形态。
  */
 import { computed, useSlots } from 'vue'
+import { useI18n } from 'vue-i18n'
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
     title: string
     /** confirm = 询问（取消 + 确定）；info = 信息（仅确定） */
@@ -20,8 +21,6 @@ withDefaults(
   }>(),
   {
     kind: 'info',
-    confirmText: '确定',
-    cancelText: '取消',
     comp: null,
     compProps: () => ({}),
     zIndex: 1000,
@@ -33,6 +32,12 @@ const emit = defineEmits<{
   (e: 'confirm'): void
   (e: 'cancel'): void
 }>()
+
+const { t } = useI18n()
+
+/** 未显式传入按钮文案时用当前语言兜底，保证切换语言后默认按钮也跟着变 */
+const confirmLabel = computed(() => props.confirmText ?? t('common.confirm'))
+const cancelLabel = computed(() => props.cancelText ?? t('common.cancel'))
 
 const slots = useSlots()
 const hasSlot = computed(() => Boolean(slots.default))
@@ -57,10 +62,10 @@ const hasSlot = computed(() => Boolean(slots.default))
         <div class="footer">
           <slot name="footer">
             <button v-if="kind === 'confirm'" type="button" class="px-btn" @click="emit('cancel')">
-              {{ cancelText }}
+              {{ cancelLabel }}
             </button>
             <button type="button" class="px-btn" @click="emit('confirm')">
-              {{ confirmText }}
+              {{ confirmLabel }}
             </button>
           </slot>
         </div>

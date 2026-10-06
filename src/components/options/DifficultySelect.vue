@@ -2,16 +2,19 @@
 /**
  * 难度按钮组：点击即向上抛出所选难度（用于「新游戏」）。
  */
+import { useI18n } from 'vue-i18n'
 import type { DifficultyId } from '@/types/game'
-import { DIFFICULTY_ORDER, DIFFICULTIES } from '@/utils/constants'
+import { DIFFICULTY_ORDER } from '@/utils/constants'
 
 const emit = defineEmits<{
   (e: 'select', id: DifficultyId): void
 }>()
+
+const { t } = useI18n()
 </script>
 
 <template>
-  <div class="difficulty-select" role="group" aria-label="选择难度">
+  <div class="difficulty-select" role="group" :aria-label="t('select.difficulty')">
     <button
       v-for="id in DIFFICULTY_ORDER"
       :key="id"
@@ -19,7 +22,7 @@ const emit = defineEmits<{
       class="px-btn"
       @click="emit('select', id)"
     >
-      {{ DIFFICULTIES[id].label }}
+      {{ t(`difficulty.${id}`) }}
     </button>
   </div>
 </template>

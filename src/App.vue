@@ -3,7 +3,9 @@
  * 页面装配：只保留游戏头部与棋盘，其余功能收进右键弹出的「选项」弹窗。
  */
 import { computed, onMounted, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import type { DifficultyId } from '@/types/game'
+import { i18n } from '@/i18n'
 import { useMinesweeper } from '@/composables/useMinesweeper'
 import { useTimer } from '@/composables/useTimer'
 import { useSound } from '@/composables/useSound'
@@ -23,6 +25,7 @@ const settings = useSettings()
 const records = useRecords()
 const sound = useSound()
 const timer = useTimer()
+const { t } = useI18n()
 
 const game = useMinesweeper({
   onFirstReveal: (difficulty) => {
@@ -61,9 +64,9 @@ let optionsDialogId: number | null = null
 
 function handleOpenOptions(): void {
   optionsDialogId = openDialog({
-    title: '选项',
+    title: t('options.title'),
     kind: 'info',
-    confirmText: '关闭',
+    confirmText: t('common.close'),
     comp: OptionsContent,
     compProps: { onNewGame: handleNewGame },
     onConfirm: () => {
@@ -108,7 +111,7 @@ function handleNewGame(id: DifficultyId) {
 }
 
 // ============================================================
-// 主题与音效同步
+// 主题、语言与音效同步
 // ============================================================
 
 // 把 settings.theme 同步到 <html data-theme>
@@ -116,6 +119,20 @@ watch(
   () => settings.theme.value,
   (theme) => {
     document.documentElement.dataset.theme = theme
+  },
+  { immediate: true },
+)
+
+// 把 settings.locale 同步到 vue-i18n、<html lang> 与页面元信息
+watch(
+  () => settings.locale.value,
+  (locale) => {
+    i18n.global.locale.value = locale
+    document.documentElement.lang = locale
+    document.title = i18n.global.t('app.title')
+    document
+      .querySelector('meta[name="description"]')
+      ?.setAttribute('content', i18n.global.t('app.description'))
   },
   { immediate: true },
 )
