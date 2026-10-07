@@ -1,6 +1,6 @@
 {
   "name": "minesweeper",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
   "description": "像素风扫雷网页游戏",
@@ -25,6 +25,7 @@
     "prettier": "^3.9.9",
     "typescript": "^5.9.3",
     "vite": "^8.3.2",
+    "vite-plugin-preload-assets": "^1.3.1",
     "vitest": "^5.0.3",
     "vue-tsc": "^3.3.11"
   }

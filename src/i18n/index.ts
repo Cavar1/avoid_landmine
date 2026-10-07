@@ -16,7 +16,7 @@ export const i18n = createI18n({
   legacy: false,
   globalInjection: true,
   locale: detectBrowserLocale(),
-  fallbackLocale: 'zh-CN',
+  fallbackLocale: 'en-US',
   messages: {
     'zh-CN': zhCN,
     'en-US': enUS,

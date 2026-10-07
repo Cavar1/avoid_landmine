@@ -16,6 +16,8 @@ import SoundToggle from './SoundToggle.vue'
 import LanguageSwitch from './LanguageSwitch.vue'
 import IconMine from '@/components/icons/IconMine.vue'
 
+const __APP_VERSION: string = __APP_VERSION__
+
 const emit = defineEmits<{
   (e: 'newGame', id: DifficultyId): void
 }>()
@@ -71,6 +73,9 @@ const active = ref('records')
             <IconMine class="gameplay-icon" />
             <p class="gameplay-text">{{ t('about.gameplay') }}</p>
           </div>
+        </GroupBox>
+        <GroupBox class="sub" :title="t('about.version')">
+          <p class="info-title">{{ __APP_VERSION }}</p>
         </GroupBox>
         <GroupBox class="sub" :title="t('about.moreInfo')">
           <div class="info-item">

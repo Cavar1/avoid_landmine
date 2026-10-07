@@ -68,6 +68,7 @@ const enUS: typeof zhCN = {
     gameplayTitle: 'How to play',
     gameplay:
       'Mines are hidden under the tiles. Take it one step at a time, use the clues from the safe areas to spot and avoid the mines, and clear every safe tile to win the game.',
+    version: 'Page version',
     moreInfo: 'More information',
     sourceCode: 'Source code',
     author: 'Author',

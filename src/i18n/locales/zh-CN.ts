@@ -66,6 +66,7 @@ export default {
     gameplayTitle: '玩法',
     gameplay:
       '格子下面埋设了不少地雷，走一步看一步，利用安全区的线索，识破并绕开那些可怕的地雷，直到排除所有安全区，即可赢得游戏胜利。',
+    version: '页面版本',
     moreInfo: '更多信息',
     sourceCode: '扫雷的源代码',
     author: '作者',
